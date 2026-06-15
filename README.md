@@ -1,4 +1,4 @@
-# Yerel Finance — Kişisel Finans Takip Uygulaması
+# Kişisel Finans Takip Uygulaması
 
 Modern, **glassmorphism** tasarımlı, karanlık/aydınlık mod destekli kişisel gelir-gider takip uygulaması. Taksit, tekrarlayan işlem, bütçe, hedef ve rapor modülleri ile eksiksiz bir "kişisel CFO" deneyimi.
 
