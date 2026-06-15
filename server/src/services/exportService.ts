@@ -212,13 +212,14 @@ export async function exportReportPdf(
       const pct = b.percentage ?? 0;
       const barW = 200 * (pct / 100);
       const rowY = doc.y;
-      doc.fontSize(9).fillColor('#0f172a').text(b.name, 40, rowY, { width: 200, lineBreak: false });
-      doc.fillColor('#64748b').text(`${formatCurrency(b.total, TRY, LOCALE)}  (%${pct.toFixed(1)})`, 240, rowY, { width: 150, align: 'right', lineBreak: false });
+      const bx = 100; // center the ~390px block on A4
+      doc.fontSize(9).fillColor('#0f172a').text(b.name, bx, rowY, { width: 200, lineBreak: false });
+      doc.fillColor('#64748b').text(`${formatCurrency(b.total, TRY, LOCALE)}  (%${pct.toFixed(1)})`, bx + 200, rowY, { width: 150, align: 'right', lineBreak: false });
       doc.moveDown(0.2);
       // Bar
       const yBar = doc.y;
-      doc.rect(40, yBar, 200, 4).fillColor('#f1f5f9').fill();
-      doc.rect(40, yBar, barW, 4).fillColor(b.color ?? '#6366f1').fill();
+      doc.rect(bx, yBar, 200, 4).fillColor('#f1f5f9').fill();
+      doc.rect(bx, yBar, barW, 4).fillColor(b.color ?? '#6366f1').fill();
       doc.moveDown(0.5);
     }
   }
