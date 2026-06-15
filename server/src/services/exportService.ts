@@ -5,9 +5,13 @@ import { getDb } from '../db/connection.js';
 import { formatCurrency } from '../utils/currency.js';
 import { format, parseISO } from 'date-fns';
 import { tr } from 'date-fns/locale';
+import path from 'path';
 
 const TRY = 'TRY';
 const LOCALE = 'tr-TR';
+
+const FONT_NORMAL = path.join(process.env.WINDIR ?? 'C:\\Windows', 'Fonts', 'DejaVuSans.ttf');
+const FONT_BOLD   = path.join(process.env.WINDIR ?? 'C:\\Windows', 'Fonts', 'DejaVuSans-Bold.ttf');
 
 function setFilename(res: Response, name: string): void {
   // Türkçe karakterler için RFC 5987
@@ -43,6 +47,8 @@ export async function exportTransactionsPdf(res: Response, f: TxnFilter): Promis
   res.setHeader('Content-Type', 'application/pdf');
 
   const doc = new PDFDocument({ size: 'A4', margin: 40, info: { Title: 'İşlemler', Author: 'Yerel Finance' } });
+  doc.registerFont('DejaVuSans', FONT_NORMAL).registerFont('DejaVuSans-Bold', FONT_BOLD);
+  doc.font('DejaVuSans');
   doc.pipe(res);
 
   // Başlık
@@ -167,6 +173,8 @@ export async function exportReportPdf(
   res.setHeader('Content-Type', 'application/pdf');
 
   const doc = new PDFDocument({ size: 'A4', margin: 40, info: { Title: filename, Author: 'Yerel Finance' } });
+  doc.registerFont('DejaVuSans', FONT_NORMAL).registerFont('DejaVuSans-Bold', FONT_BOLD);
+  doc.font('DejaVuSans');
   doc.pipe(res);
 
   doc.fontSize(22).fillColor('#1e1b4b').text(isMonthly ? 'Aylık Rapor' : 'Yıllık Rapor');
@@ -324,6 +332,8 @@ export async function exportInstallmentsPdf(res: Response): Promise<void> {
   res.setHeader('Content-Type', 'application/pdf');
 
   const doc = new PDFDocument({ size: 'A4', margin: 40 });
+  doc.registerFont('DejaVuSans', FONT_NORMAL).registerFont('DejaVuSans-Bold', FONT_BOLD);
+  doc.font('DejaVuSans');
   doc.pipe(res);
   doc.fontSize(20).fillColor('#1e1b4b').text('Taksit Planları');
   doc.fontSize(9).fillColor('#64748b').text(`Oluşturma: ${format(new Date(), 'dd MMMM yyyy HH:mm', { locale: tr })}`);
