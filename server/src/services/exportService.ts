@@ -10,8 +10,8 @@ import path from 'path';
 const TRY = 'TRY';
 const LOCALE = 'tr-TR';
 
-const FONT_NORMAL = path.join(process.env.WINDIR ?? 'C:\\Windows', 'Fonts', 'DejaVuSans.ttf');
-const FONT_BOLD   = path.join(process.env.WINDIR ?? 'C:\\Windows', 'Fonts', 'DejaVuSans-Bold.ttf');
+const FONT_NORMAL = path.join(process.env.WINDIR ?? 'C:\\Windows', 'Fonts', 'arial.ttf');
+const FONT_BOLD   = path.join(process.env.WINDIR ?? 'C:\\Windows', 'Fonts', 'arialbd.ttf');
 
 function setFilename(res: Response, name: string): void {
   // Türkçe karakterler için RFC 5987
