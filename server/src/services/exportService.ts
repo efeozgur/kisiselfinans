@@ -211,8 +211,9 @@ export async function exportReportPdf(
     for (const b of breakdown.slice(0, 15)) {
       const pct = b.percentage ?? 0;
       const barW = 200 * (pct / 100);
-      doc.fontSize(9).fillColor('#0f172a').text(b.name, 40, doc.y, { width: 200, continued: true });
-      doc.fillColor('#64748b').text(`  ${formatCurrency(b.total, TRY, LOCALE)} (%${pct.toFixed(1)})`);
+      const rowY = doc.y;
+      doc.fontSize(9).fillColor('#0f172a').text(b.name, 40, rowY, { width: 200, lineBreak: false });
+      doc.fillColor('#64748b').text(`${formatCurrency(b.total, TRY, LOCALE)}  (%${pct.toFixed(1)})`, 240, rowY, { width: 150, align: 'right', lineBreak: false });
       doc.moveDown(0.2);
       // Bar
       const yBar = doc.y;
