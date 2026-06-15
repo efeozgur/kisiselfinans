@@ -201,7 +201,6 @@ export async function exportReportPdf(
   doc.y = boxY + boxH + 20;
 
   // Kategori kırılımı
-  doc.fontSize(13).fillColor('#1e1b4b').text('Kategori Kırılımı');
   doc.moveDown(0.3);
   const breakdown = data.category_breakdown ?? [];
   if (!breakdown.length) {
